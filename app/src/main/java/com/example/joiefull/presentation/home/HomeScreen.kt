@@ -34,7 +34,7 @@ fun HomeScreen(
             else -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(bottom = 24.dp)
+                    contentPadding = PaddingValues(top = 32.dp, bottom = 24.dp)
                 ) {
                     uiState.categorizedClothes.forEach { (category, clothesList) ->
                         item(key = category.name) {

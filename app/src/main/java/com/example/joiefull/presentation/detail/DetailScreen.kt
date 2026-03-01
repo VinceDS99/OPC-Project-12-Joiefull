@@ -158,7 +158,7 @@ fun DetailScreen(
     ) {
         // Image
         Box(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+            modifier = Modifier.fillMaxWidth().padding(top = 32.dp, bottom = 12.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             Box(
