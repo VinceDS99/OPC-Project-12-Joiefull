@@ -1,6 +1,7 @@
 package com.example.joiefull.presentation.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -33,8 +34,8 @@ fun HomeScreen(
             )
             else -> {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(top = 32.dp, bottom = 24.dp)
+                    modifier = Modifier.fillMaxSize().statusBarsPadding(),
+                    contentPadding = PaddingValues(top = 16.dp, bottom = 24.dp)
                 ) {
                     uiState.categorizedClothes.forEach { (category, clothesList) ->
                         item(key = category.name) {

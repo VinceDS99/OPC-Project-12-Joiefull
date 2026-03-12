@@ -5,6 +5,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -154,11 +155,12 @@ fun DetailScreen(
         modifier = modifier
             .fillMaxSize()
             .background(Color.White)
+            .statusBarsPadding()
             .verticalScroll(rememberScrollState())
     ) {
         // Image
         Box(
-            modifier = Modifier.fillMaxWidth().padding(top = 32.dp, bottom = 12.dp),
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 12.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             Box(
@@ -167,7 +169,7 @@ fun DetailScreen(
                     .aspectRatio(0.85f)
                     .clip(RoundedCornerShape(20.dp))
                     .clickable(onClickLabel = "Agrandir l'image") { isImageZoomed = true }
-                    .semantics { contentDescription = clothes.imageDescription }
+                    .semantics { contentDescription = "${clothes.name}. ${clothes.imageDescription}" }
             ) {
                 AsyncImage(
                     model = clothes.imageUrl,
@@ -391,7 +393,10 @@ private fun ReviewForm(
                 modifier = Modifier
                     .padding(horizontal = 12.dp, vertical = 10.dp)
                     .semantics {
-                        contentDescription = "Champ commentaire. ${if (comment.isBlank()) "Vide" else comment}"
+                        contentDescription = if (comment.isBlank())
+                            "Champ commentaire : Partagez ici vos impressions sur cette pièce"
+                        else
+                            "Champ commentaire : $comment"
                     }
             ) {
                 if (comment.isEmpty()) {
@@ -417,10 +422,10 @@ private fun ReviewForm(
                 .heightIn(min = 48.dp),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFF99F43),
-                disabledContainerColor = Color(0xFFCCCCCC),
+                containerColor = Color(0xFF7A4D10),
+                disabledContainerColor = Color(0xFFE0E0E0),
                 contentColor = Color.White,
-                disabledContentColor = Color.White
+                disabledContentColor = Color(0xFF333333)
             )
         ) {
             Text("Valider mon avis", fontSize = 13.sp)
@@ -489,7 +494,8 @@ private fun UserReviewCard(
                                 onClick = { showDeleteDialog = true },
                                 onClickLabel = "Supprimer mon avis",
                                 role = Role.Button
-                            ),
+                            )
+                            .semantics { contentDescription = "Supprimer mon avis" },
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(Icons.Default.Delete, contentDescription = null,

@@ -59,10 +59,11 @@ fun ClothesItemCard(
                 .fillMaxWidth()
                 .aspectRatio(0.75f)
                 .clip(RoundedCornerShape(16.dp))
+                .clearAndSetSemantics {}
         ) {
             AsyncImage(
                 model = clothes.imageUrl,
-                contentDescription = null, // décrit par le semantics parent
+                contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
@@ -138,8 +139,8 @@ fun ClothesItemCard(
         }
 
         Row(
-            modifier = Modifier.clearAndSetSemantics {},
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            modifier = Modifier.fillMaxWidth().clearAndSetSemantics {},
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(formatPrice(clothes.price), style = MaterialTheme.typography.bodySmall)
